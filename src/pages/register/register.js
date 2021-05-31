@@ -6,7 +6,7 @@ import "../../App.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { register } from "../../Redux/actions/userActions";
-import { reg } from "../../Redux/reducers/reg.reducer";
+import { Email, password, mobile } from "../../util/validator";
 
 class Register extends React.Component {
   constructor(props) {
@@ -14,6 +14,20 @@ class Register extends React.Component {
     this.state = {};
   }
   handleData = (data) => {
+    if (!mobile(data.phone)) {
+      alert("Invalid Phone no");
+      return;
+    }
+    if (!Email(data.email)) {
+      alert("Invalid Email");
+      return;
+    }
+    if (!password(data.password)) {
+      alert(
+        "password must contain minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1"
+      );
+      return;
+    }
     this.props.register(data);
   };
   static getDerivedStateFromProps(props, state) {

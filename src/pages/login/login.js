@@ -6,12 +6,26 @@ import "../../App.css";
 import { connect } from "react-redux";
 import { login } from "../../Redux/actions/userActions";
 import { bindActionCreators } from "redux";
+import { Email, password } from "../../util/validator";
 
 class Login extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
   handleData = (data) => {
+    console.log(Email(data.email));
+    if (!Email(data.email)) {
+      alert("Invalid Email");
+      return;
+    }
+    if (!password(data.password)) {
+      alert(
+        "password must contain minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1"
+      );
+      return;
+    }
+
     this.props.login(data);
   };
   static getDerivedStateFromProps(props, state) {
