@@ -2,7 +2,6 @@
 import * as React from "react";
 import "../../App.css";
 import { Button, Modal, Table, Dropdown } from "react-bootstrap";
-import TimePicker from "react-time-picker";
 
 class calendarRightSide extends React.Component {
   constructor(props) {
@@ -101,17 +100,16 @@ class calendarRightSide extends React.Component {
       alert("Some Fields are missing");
     }
   };
-  allRow = (data, color) => {
+  allRow = (data) => {
     if (data) {
       let toBeExecute = data[1] - data[0];
       if (toBeExecute >= 1) {
         for (let i = data[0]; i < data[1]; i++) {
           setTimeout(() => {
             if (document.getElementById(`${i}`)) {
-              document.getElementById(
-                `${i}`
-              ).style.backgroundColor = `#${color}`;
+              document.getElementById(`${i}`).style.backgroundColor = `skyblue`;
               document.getElementById(`${i}`).style.color = `white`;
+              document.getElementById(`${i}`).style.border = "none";
             }
           }, 500);
         }
@@ -124,29 +122,37 @@ class calendarRightSide extends React.Component {
       this.state;
     let timeSloat = (timing || []).map((data, index) => {
       if (index !== timing.length - 1) {
-        this.allRow(data.data?.totalSloat, 63952 * (index + 3));
+        this.allRow(data.data?.totalSloat);
         return (
           <tr
             key={index}
             style={{
               width: "100%",
-              backgroundColor: data.data?.description ? "skyblue" : "white",
+              // backgroundColor: data.data?.description ? "skyblue" : "white",
+              border: "skyblue",
+              height: "100px",
             }}
-            id={index}
           >
             <td style={{ width: "15%" }}>{data && data.time}</td>
-            <td style={{ width: "85%" }}>
-              {data.data?.description ? (
-                <div>Description = {data.data?.description}</div>
-              ) : null}
-
+            <td
+              style={{
+                width: "85%",
+                backgroundColor: data.data?.description ? "skyblue" : "white",
+              }}
+              id={index}
+            >
               {data.data?.fromTime ? (
                 <>
                   <br />
                   <div>
-                    from = {data.data?.fromTime} {"  "} To {data.data?.toTime}
+                    {data.data?.fromTime} {" -"} {data.data?.toTime}
                   </div>
                 </>
+              ) : null}
+              {data.data?.description ? (
+                <div style={{ fontWeight: "800" }}>
+                  {data.data?.description}
+                </div>
               ) : null}
             </td>
           </tr>
@@ -190,8 +196,6 @@ class calendarRightSide extends React.Component {
             onClick={this.handleModal}
             type="button"
             class="btn btn-primary"
-            // data-toggle="modal"
-            // data-target="#myModal"
             style={{ width: "100px" }}
           >
             Add

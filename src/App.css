@@ -29,8 +29,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #04AA6D;
+  background-color: #000080;
   color: white;
+  border-radius: 5px;
 }
 
 /* Links on mouse-over */
