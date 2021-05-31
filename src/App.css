@@ -1,0 +1,40 @@
+.main {
+  margin: 0px;
+  padding: 0px;
+  height: 100vh;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+.calendar-heading{
+  width: auto;
+  height: 50px;
+  font-size: 30px;
+  font-weight: 900;
+  padding-top: 30px;
+  /* background-color: brown; */
+}
+.header-text{
+  /* position: absolute;
+  left: 0;
+  bottom: 0; */
+}
+.sidebar a {
+  display: block;
+  color: black;
+  padding: 16px;
+  text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+  background-color: #555;
+  color: white;
+}
