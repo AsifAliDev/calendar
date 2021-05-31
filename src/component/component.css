@@ -1,0 +1,25 @@
+.rightSide {
+background-color:"grey";
+position: relative;
+margin-top: 100px;
+}
+.carcenter{
+height: 300px;
+width: 500px;
+background-color: antiquewhite;
+margin: auto;
+
+/* position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%); */
+}
+
+.left-contaner{
+    background-image: url("../assert/image/leftSide.jpg");
+}
+.heading{
+    color: blueviolet;
+    font-weight: 900;
+    font-size: 1.5rem;
+}
