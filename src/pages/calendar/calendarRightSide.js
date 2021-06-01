@@ -100,6 +100,7 @@ class calendarRightSide extends React.Component {
             if (document.getElementById(`${i}`)) {
               document.getElementById(`${i}`).style.backgroundColor = `skyblue`;
               document.getElementById(`${i}`).style.color = `white`;
+              // document.getElementById(`${i}`).style.border = `none`;
             }
           }, 500);
         }
@@ -118,22 +119,18 @@ class calendarRightSide extends React.Component {
             key={index}
             style={{
               width: "100%",
-              backgroundColor: data.data?.description ? "skyblue" : "white",
+              height: "100px",
             }}
-            id={index}
           >
             <td style={{ width: "15%" }}>{data && data.time}</td>
-            <td style={{ width: "85%" }}>
-              {data.data?.description ? (
-                <div>Description = {data.data?.description}</div>
-              ) : null}
-
+            <td style={{ width: "85%" }} id={index}>
               {data.data?.fromTime ? (
                 <>
                   <br />
                   <div>
-                    from = {data.data?.fromTime} {"  "} To {data.data?.toTime}
+                    {data.data?.fromTime} {"-"} {data.data?.toTime}
                   </div>
+                  <div>{data.data?.description}</div>
                 </>
               ) : null}
             </td>
