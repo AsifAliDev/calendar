@@ -100,7 +100,9 @@ class calendarRightSide extends React.Component {
             if (document.getElementById(`${i}`)) {
               document.getElementById(`${i}`).style.backgroundColor = `skyblue`;
               document.getElementById(`${i}`).style.color = `white`;
-              // document.getElementById(`${i}`).style.border = `none`;
+              if (data[1] - data[0] !== 1) {
+                document.getElementById(`${i}`).style.border = `none`;
+              }
             }
           }, 500);
         }
@@ -130,7 +132,9 @@ class calendarRightSide extends React.Component {
                   <div>
                     {data.data?.fromTime} {"-"} {data.data?.toTime}
                   </div>
-                  <div>{data.data?.description}</div>
+                  <div style={{ fontWeight: "900" }}>
+                    {data.data?.description}
+                  </div>
                 </>
               ) : null}
             </td>
