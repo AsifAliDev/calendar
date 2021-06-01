@@ -1,6 +1,8 @@
 // @flow
 import * as React from "react";
+
 import "./component.css";
+import { Email, Password } from "../util/validator";
 
 class RightSideLogin extends React.Component {
   constructor(props) {
@@ -22,12 +24,24 @@ class RightSideLogin extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    let { email, password } = this.state;
-    if (email.length > 0 && password.length > 0) {
+    let valid = this.validatinCheck();
+    if (valid) {
       this.props.data(this.state);
-    } else {
-      alert("Some fields are missing");
     }
+  };
+  validatinCheck = () => {
+    let { email, password } = this.state;
+    if (!Email(email)) {
+      alert("Invalid Email");
+      return false;
+    }
+    if (!Password(password)) {
+      alert(
+        "Password must contain minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1"
+      );
+      return false;
+    }
+    return true;
   };
   render() {
     return (

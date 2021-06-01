@@ -1,7 +1,8 @@
 // @flow
 import * as React from "react";
-import "./component.css";
 
+import "./component.css";
+import { Email, Password, Phone, IsString } from "../util/validator";
 class RightSideSignup extends React.Component {
   constructor(props) {
     super(props);
@@ -33,19 +34,32 @@ class RightSideSignup extends React.Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    let { name, password, phone, image, email, checkbox } = this.state;
-    if (
-      name !== "" &&
-      password !== "" &&
-      phone !== "" &&
-      image &&
-      email !== "" &&
-      checkbox !== false
-    ) {
+    let valid = this.validatinCheck();
+    if (valid) {
       this.props.data(this.state);
-    } else {
-      alert("Some fields are missing");
     }
+  };
+  validatinCheck = () => {
+    let { name, password, phone, image, email, checkbox } = this.state;
+    if (!Email(email)) {
+      alert("Invalid Email");
+      return false;
+    }
+    if (!Password(password)) {
+      alert(
+        "Password must contain minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1"
+      );
+      return false;
+    }
+    if (!Phone(phone)) {
+      alert("Invalid Phone no");
+      return false;
+    }
+    if (!IsString(name)) {
+      alert("Invalid name");
+      return false;
+    }
+    return true;
   };
   render() {
     return (

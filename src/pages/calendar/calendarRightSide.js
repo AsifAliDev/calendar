@@ -1,7 +1,10 @@
 // @flow
 import * as React from "react";
-import "../../App.css";
+
 import { Button, Modal, Table, Dropdown } from "react-bootstrap";
+import moment from "moment";
+
+import "../../App.css";
 
 class calendarRightSide extends React.Component {
   constructor(props) {
@@ -10,7 +13,6 @@ class calendarRightSide extends React.Component {
       isModalOpen: false,
       currentBooking: {},
       timing: [],
-      today: new Date(),
       fromTime: "",
       toTime: "",
       description: "",
@@ -25,31 +27,13 @@ class calendarRightSide extends React.Component {
   handleModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
-      fromTime: "",
       toTime: "",
+      fromTime: "",
       description: "",
     });
   };
-  getDate = (today) => {
-    let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-    let month = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    let todaysDate = `${day[today.getDay()]}, ${today.getMonth()} ${
-      month[today.getMonth()]
-    } ${today.getFullYear()}`;
-    return todaysDate;
+  getDate = () => {
+    return moment().format("dddd, MMMM Do YYYY");
   };
   handleFromTime = (data, index) => {
     this.setState({
@@ -80,8 +64,11 @@ class calendarRightSide extends React.Component {
       timing,
     } = this.state;
     if (fromTime && toTime && description) {
-      if (timing[toTimingStartIndex].data) {
-        alert("Appoinment already exist");
+      if (
+        timing[toTimingStartIndex].data &&
+        timing[toTimingStartIndex].data.description
+      ) {
+        alert("Slot already booked");
       } else {
         timing[toTimingStartIndex].data = {
           fromTime,
@@ -95,8 +82,8 @@ class calendarRightSide extends React.Component {
         this.props.data(timing);
         this.setState({
           isModalOpen: !isModalOpen,
-          fromTime: "",
           toTime: "",
+          fromTime: "",
           description: "",
         });
       }
@@ -113,7 +100,6 @@ class calendarRightSide extends React.Component {
             if (document.getElementById(`${i}`)) {
               document.getElementById(`${i}`).style.backgroundColor = `skyblue`;
               document.getElementById(`${i}`).style.color = `white`;
-              document.getElementById(`${i}`).style.border = "none";
             }
           }, 500);
         }
@@ -122,9 +108,9 @@ class calendarRightSide extends React.Component {
   };
 
   render() {
-    let { isModalOpen, today, fromTime, toTime, timing, toTimingStartIndex } =
+    let { isModalOpen, fromTime, toTime, timing, toTimingStartIndex } =
       this.state;
-    let timeSloat = (timing || []).map((data, index) => {
+    let timeSloat = timing.map((data, index) => {
       if (index !== timing.length - 1) {
         this.allRow(data.data?.totalSloat);
         return (
@@ -132,30 +118,23 @@ class calendarRightSide extends React.Component {
             key={index}
             style={{
               width: "100%",
-              border: "skyblue",
-              height: "100px",
+              backgroundColor: data.data?.description ? "skyblue" : "white",
             }}
+            id={index}
           >
             <td style={{ width: "15%" }}>{data && data.time}</td>
-            <td
-              style={{
-                width: "85%",
-                backgroundColor: data.data?.description ? "skyblue" : "white",
-              }}
-              id={index}
-            >
+            <td style={{ width: "85%" }}>
+              {data.data?.description ? (
+                <div>Description = {data.data?.description}</div>
+              ) : null}
+
               {data.data?.fromTime ? (
                 <>
                   <br />
                   <div>
-                    {data.data?.fromTime} {" -"} {data.data?.toTime}
+                    from = {data.data?.fromTime} {"  "} To {data.data?.toTime}
                   </div>
                 </>
-              ) : null}
-              {data.data?.description ? (
-                <div style={{ fontWeight: "800" }}>
-                  {data.data?.description}
-                </div>
               ) : null}
             </td>
           </tr>
@@ -199,6 +178,8 @@ class calendarRightSide extends React.Component {
             onClick={this.handleModal}
             type="button"
             class="btn btn-primary"
+            // data-toggle="modal"
+            // data-target="#myModal"
             style={{ width: "100px" }}
           >
             Add
@@ -212,7 +193,7 @@ class calendarRightSide extends React.Component {
             <Modal.Body>
               <div className="container">
                 <div>Date</div>
-                <div>{this.getDate(today)}</div>
+                <div>{this.getDate()}</div>
                 <br />
                 <div className="row">
                   <div className="col-sm-6 col-md-6 col-lg-6 col-xl-6">

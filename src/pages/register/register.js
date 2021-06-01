@@ -1,12 +1,13 @@
 // @flow
 import * as React from "react";
-import RightSide from "../../component/rightSideRegister";
-import LeftSide from "../../component/loginSignupLeftSide";
-import "../../App.css";
+
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+
+import RightSide from "../../component/rightSideRegister";
+// import LeftSide from "../../component/loginSignupLeftSide";
 import { register } from "../../Redux/actions/userActions";
-import { Email, password, mobile } from "../../util/validator";
+import "../../App.css";
 
 class Register extends React.Component {
   constructor(props) {
@@ -14,20 +15,6 @@ class Register extends React.Component {
     this.state = {};
   }
   handleData = (data) => {
-    if (!mobile(data.phone)) {
-      alert("Invalid Phone no");
-      return;
-    }
-    if (!Email(data.email)) {
-      alert("Invalid Email");
-      return;
-    }
-    if (!password(data.password)) {
-      alert(
-        "password must contain minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1"
-      );
-      return;
-    }
     this.props.register(data);
   };
   static getDerivedStateFromProps(props, state) {
@@ -40,7 +27,7 @@ class Register extends React.Component {
       <div className=" bg-light">
         <div class="row main" style={{ margin: "0px", padding: "0px" }}>
           <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6 left-contaner">
-            <LeftSide />
+            {/* <LeftSide /> */}
           </div>
           <div class="col-sm-12 col-md-6 col-lg-6 col-xl-6">
             <RightSide data={this.handleData} />

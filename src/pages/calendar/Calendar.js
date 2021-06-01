@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-import CalendarRightSide from "./calendarRightSide";
-import { connect } from "react-redux";
-import { creatBooking, getBooking } from "../../Redux/actions/userActions";
+
 import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+
+import CalendarRightSide from "./calendarRightSide";
+import { creatBooking, getBooking } from "../../Redux/actions/userActions";
 
 class Calendar extends React.PureComponent {
   constructor(props) {
