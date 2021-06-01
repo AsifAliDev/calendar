@@ -25,13 +25,11 @@ class calendarRightSide extends React.Component {
   handleModal = () => {
     this.setState({
       isModalOpen: !this.state.isModalOpen,
+      fromTime: "",
+      toTime: "",
+      description: "",
     });
   };
-  // onChange = (data) => {
-  //   this.setState({
-  //     value: data,
-  //   });
-  // };
   getDate = (today) => {
     let day = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     let month = [
@@ -82,20 +80,26 @@ class calendarRightSide extends React.Component {
       timing,
     } = this.state;
     if (fromTime && toTime && description) {
-      timing[toTimingStartIndex].data = {
-        fromTime,
-        toTime,
-        description,
-        totalSloat: [
-          toTimingStartIndex,
-          toTimingStartIndex + toTimingEndIndex + 1,
-        ],
-      };
-      this.props.data(timing);
-      this.setState({
-        isModalOpen: !isModalOpen,
-        // timing: update,
-      });
+      if (timing[toTimingStartIndex].data) {
+        alert("Appoinment already exist");
+      } else {
+        timing[toTimingStartIndex].data = {
+          fromTime,
+          toTime,
+          description,
+          totalSloat: [
+            toTimingStartIndex,
+            toTimingStartIndex + toTimingEndIndex + 1,
+          ],
+        };
+        this.props.data(timing);
+        this.setState({
+          isModalOpen: !isModalOpen,
+          fromTime: "",
+          toTime: "",
+          description: "",
+        });
+      }
     } else {
       alert("Some Fields are missing");
     }
@@ -128,7 +132,6 @@ class calendarRightSide extends React.Component {
             key={index}
             style={{
               width: "100%",
-              // backgroundColor: data.data?.description ? "skyblue" : "white",
               border: "skyblue",
               height: "100px",
             }}
@@ -244,6 +247,7 @@ class calendarRightSide extends React.Component {
                     rows="4"
                     name="description"
                     onChange={this.handleChange}
+                    value={this.state.description}
                   />
                 </div>
               </div>

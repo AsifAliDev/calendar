@@ -1,70 +1,51 @@
-# Getting Started with Create React App
+## Appointment booking
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+#### Example:
 
-## Available Scripts
+This is an application for Appointment booking slot in givin timing
 
-In the project directory, you can run:
+## Project Status
 
-### `npm start`
+User can create account login and book the appointment according to his/her prefer time
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Example:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+This project is where user can create account login and book the appointment according to his/her prefer time
 
-### `npm test`
+#### Example:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
-### `npm run build`
+Installation:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+`npm install`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+To Run Test Suite:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+`npm test`
 
-### `npm run eject`
+To Start Server:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+`npm start`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+To Visit App:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+`localhost:3000/login`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Reflection
 
-## Learn More
+- This project is where user can create account login and book the appointment according to his/her prefer time
+- It is made by using the `create-react-app` boilerplate, then adding `react-router-4.0` ,`validator`and `redux` .
+- Why was this project challenging and therefore a really good learning experience?
+- What were some unexpected obstacles like data storing locally and stimulate in realtime
+- What tools did you use to implement this project?
+  - This might seem obvious because you are IN this React.js, with the help of `create-react-app` boilerplate`reactBootstrap` , `react-router-4.0` ,`validator`and `redux` .
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Component by description
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Register
+  - user first need to create account by providing business name,phone no .email.and password
+- login
+  - user need to login with register email and password and that with land in to `/calendar` route
+- calendar
+  - user can book the appointment according to desire time available by providing start time and end time along with description and if that slot is empty then user can able to book his/her appointment .
